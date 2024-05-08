@@ -5,4 +5,6 @@ habby_app_side_project
 
 
 ####
-npm install axios --save
+npm install axios --save  
+npm install redux  
+npm install react-redux

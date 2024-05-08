@@ -21,13 +21,20 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    runtimeOnly 'mysql:mysql-connector-java'
+
 
     implementation 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation group: 'org.apache.commons', name: 'commons-text', version: '1.10.0'
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
+
 
 }
 
@@ -36,17 +43,16 @@ test {
 }
 
 
-// 리액트 설정 관련
+// 리액트 설정 관련 - 잠깐 주석 해놓음
 def frontendDir = "$projectDir/src/main/reactRepo/pubHabby"
-
-sourceSets {
-    main {
-        resources { srcDirs = ["$projectDir/src/main/resources"]
-        }
-    }
-}
-
-processResources { dependsOn "copyReactBuildFiles" }
+//
+//sourceSets {
+//    main {
+//        resources { srcDirs = ["$projectDir/src/main/resources"]
+//        }
+//    }
+//}
+//processResources { dependsOn "copyReactBuildFiles" }
 
 task installReact(type: Exec) {
 //    dependsOn "startReactDevServer"

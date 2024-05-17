@@ -1,4 +1,4 @@
-package org.pubHabby.program.customer;
+package org.pubHabby.program.controller;
 
 
 import org.springframework.ui.Model;

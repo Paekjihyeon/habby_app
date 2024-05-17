@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 @RestController
 public class test {
-        @GetMapping("/api/hello")
-        public String test() {
+    @GetMapping("/api/hello")
+    public String test() {
 
-            return "Hello, world!";
+        return "Hello, world!";
         }
+    @GetMapping("/")
+    public String SecurityTest() {
+        return "IS CORRECT.";
+    }
+
     }
 

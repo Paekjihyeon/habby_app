@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.pubHabby.program.security.mapper.">
+
+    <!-- 로그인 회원 조회   -->
+    <select id="findMember" parameterType="java.lang.String" resultType="org.pubHabby.program.security.model.UserDetailInfo">
+        SELECT member_id AS userId,
+               member_pass AS password
+               member_nick, member_image, pass_update_date
+        FROM tb_member
+        WHERE member_id = #{userId}
+    </select>
+
+    <!-- 로그인 로그 -->
+    <insert id="saveLoginLog" parameterType="org.pubHabby.program.security.model.LoginLog">
+        INSERT INTO tb_login_log (write_id, ip, regdate)
+        VALUES(#{write_id}, #{ip}, current_timestamp())
+    </insert>
+
+</mapper>

@@ -6,6 +6,7 @@ import org.pubHabby.program.model.member.Member;
 import org.pubHabby.program.security.mapper.UserMapper;
 import org.pubHabby.program.security.model.LoginLog;
 import org.pubHabby.program.security.model.UserDetailInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,10 +18,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Service
 public class UserDetailService implements UserDetailsService {
 
+    @Autowired
     private UserMapper userMapper;
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        System.out.println("USER DETAIL");
 
         //회원 검증
         Member member = userMapper.findMember(userId);

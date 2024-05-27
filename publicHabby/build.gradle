@@ -22,16 +22,16 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-//    runtimeOnly 'mysql:mysql-connector-java'
-
+    implementation 'mysql:mysql-connector-java:8.0.28'
 
     implementation 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation group: 'org.apache.commons', name: 'commons-text', version: '1.10.0'
 
-
+//    spring security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
 
@@ -44,7 +44,7 @@ test {
 
 
 // 리액트 설정 관련 - 잠깐 주석 해놓음
-def frontendDir = "$projectDir/src/main/reactRepo/pubHabby"
+//def frontendDir = "$projectDir/src/main/reactRepo/pubHabby"
 //
 //sourceSets {
 //    main {
@@ -54,46 +54,46 @@ def frontendDir = "$projectDir/src/main/reactRepo/pubHabby"
 //}
 //processResources { dependsOn "copyReactBuildFiles" }
 
-task installReact(type: Exec) {
-//    dependsOn "startReactDevServer"
-    workingDir "$frontendDir"
-    inputs.dir "$frontendDir"
-    group = BasePlugin.BUILD_GROUP
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "audit", "fix"
-        commandLine 'npm.cmd', 'install' }
-    else {
-        commandLine "npm", "audit", "fix" commandLine 'npm', 'install'
-    }
-}
-
-task buildReact(type: Exec) {
-    dependsOn "installReact"
-    workingDir "$frontendDir"
-    inputs.dir "$frontendDir"
-    group = BasePlugin.BUILD_GROUP
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "run-script", "build"
-    } else {
-        commandLine "npm", "run-script", "build"
-    }
-}
-
-task copyReactBuildFiles(type: Copy) {
-    dependsOn "buildReact"
-    from "$frontendDir/build"
-    into "$projectDir/src/main/resources/static"
-}
-
-
-// 스프링 웹서버 실행시 react 실행 ->  사용안함
-task startReactDevServer(type: Exec) {
-    workingDir "$frontendDir"
-    group = 'React'
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "start"
-    } else {
-        commandLine "npm", "start"
-    }
-}
+//task installReact(type: Exec) {
+////    dependsOn "startReactDevServer"
+//    workingDir "$frontendDir"
+//    inputs.dir "$frontendDir"
+//    group = BasePlugin.BUILD_GROUP
+//    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//        commandLine "npm.cmd", "audit", "fix"
+//        commandLine 'npm.cmd', 'install' }
+//    else {
+//        commandLine "npm", "audit", "fix" commandLine 'npm', 'install'
+//    }
+//}
+//
+//task buildReact(type: Exec) {
+//    dependsOn "installReact"
+//    workingDir "$frontendDir"
+//    inputs.dir "$frontendDir"
+//    group = BasePlugin.BUILD_GROUP
+//    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//        commandLine "npm.cmd", "run-script", "build"
+//    } else {
+//        commandLine "npm", "run-script", "build"
+//    }
+//}
+//
+//task copyReactBuildFiles(type: Copy) {
+//    dependsOn "buildReact"
+//    from "$frontendDir/build"
+//    into "$projectDir/src/main/resources/static"
+//}
+//
+//
+//// 스프링 웹서버 실행시 react 실행 ->  사용안함
+//task startReactDevServer(type: Exec) {
+//    workingDir "$frontendDir"
+//    group = 'React'
+//    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//        commandLine "npm.cmd", "start"
+//    } else {
+//        commandLine "npm", "start"
+//    }
+//}
 

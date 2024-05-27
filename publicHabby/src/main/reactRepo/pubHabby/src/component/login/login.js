@@ -3,7 +3,9 @@ import { useState } from "react";
 // import GetAxios from "../../common/axiox"; // 이렇게 수정해야 함
 
 const UserLogin = () => {
-  
+
+    axios.defaults.withCredentials = true;
+
   /**로그인 정보 그릇 */
   const [loginInfo, setLoginInfo] = useState({
     userId : "",
@@ -18,9 +20,9 @@ const UserLogin = () => {
         axios
           .post("http://localhost:8081/api/login", formdata)
           .then((response) => {
-            console.log("response ::", response.data);
+            console.log("response ::", response);
           })
-          .catch((error) => console.log(error));
+          .catch((error) => console.error(error));
         
         // const response = await axios.post("http://localhost:8081/login", formdata);
         // return response;
